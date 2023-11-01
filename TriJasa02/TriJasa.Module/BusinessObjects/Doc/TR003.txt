@@ -1,0 +1,39 @@
+﻿[ImmediatePostData]
+public string Address1 {
+    // ...
+}
+[Appearance("AddressOneIsEmpty", Enabled = false, Criteria = "IsNullOrEmpty(Address1)", Context="DetailView")]
+public string Address2 {
+    // ...
+}
+
+
+using DevExpress.ExpressApp.ConditionalAppearance;
+using DevExpress.ExpressApp.Editors;
+//...
+[ImmediatePostData]
+public bool IsMarried {
+    // ...
+}
+[Appearance("Single", Visibility = ViewItemVisibility.Hide, Criteria = "!IsMarried", Context="DetailView")]
+public string SpouseName {
+    // ...
+}
+
+
+
+https://supportcenter.devexpress.com/ticket/details/t615814/obsolete-web-lookup-property-editor-based-on-aspxgridlookup
+
+
+
+using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.Web.Editors.ASPx;
+// ...
+public class EnableAdaptivityController : ViewController<ListView> {
+    protected override void OnActivated() {
+        base.OnActivated();
+        ASPxGridListEditor listEditor = View.Editor as ASPxGridListEditor;
+        if(listEditor != null)
+            listEditor.IsAdaptive = true;
+    }
+}

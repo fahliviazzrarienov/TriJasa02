@@ -1,0 +1,317 @@
+﻿
+1. Make a Property Calculable
+
+
+[DefaultClassOptions, ImageName("BO_SaleItem")]
+public class Payment : BaseObject {
+    public Payment(Session session) : base(session) { }
+    private double rate;
+    public double Rate {
+        get {
+            return rate;
+        }
+        set {
+            if(SetPropertyValue(nameof(Rate), ref rate, value))
+                OnChanged(nameof(Amount));
+        }
+    }
+    private double hours;
+    public double Hours {
+        get {
+            return hours;
+        }
+        set {
+            if(SetPropertyValue(nameof(Hours), ref hours, value))
+                OnChanged(nameof(Amount));
+        }
+    }
+    [PersistentAlias("Rate * Hours")]
+    public double Amount {
+        get {
+            object tempObject = EvaluateAlias(nameof(Amount));
+            if(tempObject != null) {
+                return (double)tempObject;
+            }
+            else {
+                return 0;
+            }
+        }
+    }
+}
+
+master detail
+
+https://docs.devexpress.com/eXpressAppFramework/113161/task-based-help/views/how-to-access-master-detail-view-and-nested-list-view-environment?p=netframework
+
+3. 
+MFC (CString)	C# (string)
+somestring.Left(nCount)	somestring.Substring(0,nCount)
+somestring.Mid(nIndex)	somestring.Substring(nIndex)
+somestring.Mid(nIndex,nCount)	Somestring.Substring(nIndex,nCount)
+somestring.Right(nCount)	somestring.Substring(somestring.Length-nCount,nCount)
+
+
+
+4. DETAILVIEW WITH SCREEEN
+
+sing System.Web.UI.WebControls;
+using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.Web;
+//...
+public class CustomizePopupSizeController : WindowController {
+    public CustomizePopupSizeController() {
+        this.TargetWindowType = WindowType.Main;
+    }
+    protected override void OnActivated() {
+        base.OnActivated();
+        ((WebApplication)Application).PopupWindowManager.PopupShowing += 
+PopupWindowManager_PopupShowing;
+    }
+    private void PopupWindowManager_PopupShowing(object sender, PopupShowingEventArgs e) {
+        e.PopupControl.CustomizePopupWindowSize += XafPopupWindowControl_CustomizePopupWindowSize;
+    } 
+    private void XafPopupWindowControl_CustomizePopupWindowSize(object sender, 
+DevExpress.ExpressApp.Web.Controls.CustomizePopupWindowSizeEventArgs e) {
+        e.Width = new Unit(600);
+        e.Height = new Unit(400);
+        e.Handled = true;
+    }
+}
+========================================================DATA SOURCE PROPERTY ===========================
+
+[DefaultClassOptions]
+public class Contact : Person {
+    //...
+    private Contact manager;
+    [DataSourceProperty("Department.Contacts")]   
+     [DataSourceProperty("Department.Contacts",DataSourcePropertyIsNullMode.SelectAll)]
+    [DataSourceCriteria("Position.Title = 'Manager' AND Oid != '@This.Oid'")]
+    public Contact Manager {
+       get { return manager; }
+       set { SetPropertyValue(nameof(Manager), ref manager, value); }
+    }
+    //...
+}
+
+====================================
+
+using System.ComponentModel;
+using DevExpress.Data.Filtering;
+//...
+[DefaultClassOptions]
+public class Order : BaseObject {
+   public Order(Session session) : base(session) { }
+   private Product fProduct;
+   public Product Product {
+      get {
+         return fProduct;
+      }
+      set {
+         SetPropertyValue(nameof(Product), ref fProduct, value);
+      }
+   }
+   private Accessory fAccessory;
+   public Accessory Accessory {
+      get {
+         return fAccessory;
+      }
+      set {
+         SetPropertyValue(nameof(Accessory), ref fAccessory, value);
+      }
+   }
+}
+public class Product : BaseObject {
+   public Product(Session session) : base(session) { }
+   private String fProductName;
+   public String ProductName {
+      get { 
+         return fProductName;
+      }
+      set {
+         SetPropertyValue(nameof(ProductName), ref fProductName, value);
+      }
+   }
+   [Association("P-To-C")]
+   public XPCollection<Accessory> Accessories {
+      get { return GetCollection<Accessory>(nameof(Accessories)); }
+   }
+}
+public class Accessory : BaseObject {
+   public Accessory(Session session) : base(session) { }
+   private String fAccessoryName;
+   public String AccessoryName {
+      get { 
+         return fAccessoryName; 
+      }
+      set {
+         SetPropertyValue(nameof(AccessoryName), ref fAccessoryName, value);
+      }
+   }
+   private bool fIsGlobal;
+   public bool IsGlobal {
+      get {
+         return fIsGlobal;
+      }
+      set {
+         SetPropertyValue(nameof(IsGlobal), ref fIsGlobal, value);
+      }
+   }
+   private Product fProduct;
+   [Association("P-To-C")]
+   public Product Product { 
+      get {
+         return fProduct;
+      } 
+      set {
+         SetPropertyValue(nameof(Product), ref fProduct, value);
+      } 
+   }
+}
+
+
+[DefaultClassOptions]
+public class Order : BaseObject {
+   // ...
+   [DataSourceCriteria("IsGlobal = true")]
+   public Accessory Accessory {
+      get {
+         return fAccessory;
+      }
+      set {
+         SetPropertyValue(nameof(Accessory), ref fAccessory, value);
+      }
+   }
+}
+public class Accessory : BaseObject {
+      // ...
+   private bool fIsGlobal;
+   public bool IsGlobal {
+      get { return fIsGlobal; }
+      set { 
+         SetPropertyValue(nameof(IsGlobal), ref fIsGlobal, value);      
+      }
+   }
+}
+
+
+
+
+-----==================================
+[DefaultClassOptions]
+public class Order : BaseObject {
+   // ...
+   [DataSourceProperty("Product.Accessories", 
+      DataSourcePropertyIsNullMode.CustomCriteria, "IsGlobal = true")]
+   public Accessory Accessory {
+      get {
+         return fAccessory;
+      }
+      set {
+         SetPropertyValue(nameof(Accessory), ref fAccessory, value);
+      }
+   }
+}
+=========================================
+Implement Cascading Filtering for Lookup List Views
+====================================================================
+
+[DefaultClassOptions]
+public class Order : BaseObject {
+   // ...
+   // Set the AvailableAccessories collection as a data source for the Accessory property
+   [DataSourceProperty(nameof(AvailableAccessories))] 
+   public Accessory Accessory {
+      get {return fAccessory;}
+      set {
+         SetPropertyValue(nameof(Accessory), ref fAccessory, value);
+      }
+   }
+   private XPCollection<Accessory> fAvailableAccessories;
+   [Browsable(false)] // Prohibits showing the AvailableAccessories collection separately
+   public XPCollection<Accessory> AvailableAccessories {
+      get {
+         if(fAvailableAccessories == null) {
+            // Retrieve all Accessory objects
+            fAvailableAccessories = new XPCollection<Accessory>(Session);
+            // Filter the retrieved collection according to current conditions
+            RefreshAvailableAccessories();
+         }
+         // Return the filtered collection of Accessory objects
+         return fAvailableAccessories;
+      }
+   }
+   private void RefreshAvailableAccessories() {
+      if(fAvailableAccessories == null)
+         return;
+      // Process the situation when the Product is not specified (see the Scenario 3 above)
+      if(Product == null) {
+         // Show only Global Accessories when the Product is not specified
+         fAvailableAccessories.Criteria = CriteriaOperator.Parse("[IsGlobal] = true");
+      }
+      else {
+         // Leave only the current Product's Accessories in the fAvailableAccessories collection
+         fAvailableAccessories.Criteria = new BinaryOperator("Product", Product);
+         if(IncludeGlobalAccessories == true) {
+            // Add Global Accessories
+            XPCollection<Accessory> availableGlobalAccessories = 
+               new XPCollection<Accessory>(Session);
+            availableGlobalAccessories.Criteria = CriteriaOperator.Parse("[IsGlobal] = true");
+            fAvailableAccessories.AddRange(availableGlobalAccessories);
+         }
+      }
+      // Set null for the Accessory property to allow an end-user 
+      //to set a new value from the refreshed data source
+      Accessory = null;
+   }
+   public Product Product {
+      get {return fProduct;}
+      set {
+         SetPropertyValue(nameof(Product), ref fProduct, value);
+         // Refresh the Accessory Property data source
+         RefreshAvailableAccessories();
+      }
+   }
+   private bool fIncludeGlobalAccessories;
+   [ImmediatePostData] //Use this attribute to refresh the Accessory 
+   public bool IncludeGlobalAccessories {
+      get {return fIncludeGlobalAccessories;}
+      set {
+         if(fIncludeGlobalAccessories != value) {
+            fIncludeGlobalAccessories = value;
+            if(!IsLoading) {
+               // Refresh the Accessory Property data source                    
+               RefreshAvailableAccessories();
+               SetPropertyValue(nameof(IncludeGlobalAccessories), ref fIncludeGlobalAccessories, value);
+            }
+         }
+      }
+   }
+}
+===================================================
+
+using DevExpress.Persistent.Base;
+using DevExpress.Persistent.BaseImpl;
+// ...
+public class Contact : Person {
+    // ...
+    [DataSourceProperty("Department.Contacts", DataSourcePropertyIsNullMode.SelectAll)]
+    [DataSourceCriteria("Position.Title = 'Manager' AND Oid != '@This.Oid'")]
+    public Contact Manager {
+        get {
+            return fManager;
+        }
+        set {
+            SetPropertyValue(nameof(Manager), ref fManager, value);
+        }
+    }
+    // ...
+}
+
+
+https://docs.devexpress.com/eXpressAppFramework/112676/concepts/controllers-and-actions/customize-controllers-and-actions
+
+https://docs.devexpress.com/eXpressAppFramework/113703/concepts/extra-modules/reports-v2/invoke-the-report-preview-from-code
+
+https://docs.devexpress.com/eXpressAppFramework/112623/concepts/controllers-and-actions
+
+https://docs.devexpress.com/eXpressAppFramework/112638/concepts/ui-construction

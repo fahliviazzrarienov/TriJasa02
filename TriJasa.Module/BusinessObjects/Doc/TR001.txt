@@ -1,0 +1,606 @@
+--
+namespace XCRM.Web {
+    public class Global : System.Web.HttpApplication {
+        public Global() {
+            DevExpress.ExpressApp.Web.WebApplication.EnableMultipleBrowserTabsSupport = true;
+--
+
+1. Class Standard
+
+    [DefaultClassOptions]
+    [ImageName("ModelEditor_Views")]
+    [System.ComponentModel.DefaultProperty("PositionName")]
+    [NavigationItem("GPN")]
+    // Standard Document
+    [System.ComponentModel.DisplayName("Position")]
+
+2. PROPERTY
+	[RuleRequiredField(DefaultContexts.Save)]
+        [XafDisplayName("Department"), ToolTip("Department")]
+        [Size(10)]
+        public virtual string Department
+        {
+            get { return GetPropertyValue<string>("Department"); }
+            set { SetPropertyValue("Department", value); }
+	}
+3. Association
+
+        [Association("CompanyAlert")]
+        public XPCollection<GSCompany> Companies
+        {
+            get
+            {
+                return GetCollection<GSCompany>("Companies");
+            }
+        }
+      private ASAlertSetup _AlertSetup;
+        //[RuleRequiredField(DefaultContexts.Save)]
+        [XafDisplayName("AlertSetup"), ToolTip("AlertSetup")]
+        [Association("CompanyAlert")]
+        public virtual ASAlertSetup AlertSetup
+        {
+            get { return _AlertSetup; }
+            set { SetPropertyValue("AlertSetup", ref _AlertSetup, value); }
+        }
+
+4. FIND OBJECT
+	icolName = ePeopleColumn.Department.GetHashCode();
+        string xlsValueDepartment = worksheet.Cells[i, icolName].Value.ToString();
+        sqlQuery = string.Format(" DepartmentName == '{0}' ", xlsValueDepartment.Replace("'", "''"));
+        filterOperator = CriteriaOperator.Parse(sqlQuery);
+        GSDepartment ouDepartment = Session.FindObject<GSDepartment>(filterOperator);
+        if (ouDepartment != null)
+        {
+        uoPeople.Department = ouDepartment;
+        }
+5. ADD NEW RECORD
+	SKPeople uoPeople;
+        if (uoPeople == null)
+        {
+        uoPeople = new SKPeople(Session);
+        }
+	 uoPeople.ID = worksheet.Cells[i, icolName].Value.ToString().Trim();
+	 uoPeople.Save();
+6. ENUM
+       public enum ePeopleColumn
+        {
+        [XafDisplayName("ID")]
+        ID = 0,
+        [XafDisplayName("Name")]
+        Name = 1,
+        [XafDisplayName("Position")]
+        Position = 2,
+        [XafDisplayName("Email")]
+        Email = 3,
+        [XafDisplayName("TelpExtNo")]
+        TelpExtNo = 4,
+        [XafDisplayName("TelpDirectNo")]
+        TelpDirectNo = 5,
+        [XafDisplayName("MobileNumber")]
+        MobileNumber = 6,
+        [XafDisplayName("Department")]
+        Department = 7,
+        [XafDisplayName("OU")]
+        OU = 8
+      };
+
+7. CONNECTION STRING
+	<add name="ConnectionString" connectionString="XpoProvider=Postgres;Server=localhost;User ID=postgres;Password=1;Database=GNP;Encoding=UNICODE" />
+
+
+8. FEACH DATA
+	string txtSql = "";
+        XPCollection<PerihalSurat> AvailablePerihalSurat;
+        txtSql = String.Format("JenisSertifikat = {0}", Convert.ToInt16 ( base.JenisSertifikat ).ToString ());
+        AvailablePerihalSurat = new XPCollection<PerihalSurat>(Session) { Criteria = CriteriaOperator.Parse(txtSql) };
+        foreach (PerihalSurat perihalsurat in AvailablePerihalSurat)
+                    {
+
+                        if (TandaTangan == "" || TandaTangan == null )
+                        {
+                            TandaTangan = perihalsurat.TandaTangan;
+                        }
+                        if (Jabatan == "" || Jabatan == null )
+                        {
+                            Jabatan = perihalsurat.TandaTanganJabatan;
+                        }
+             }
+
+8a. feach data- 1
+	    //Int32 pnbpOID;
+            //Connection();
+            //XpoTypesInfoHelper.GetXpoTypeInfoSource();
+            //XafTypesInfo.Instance.RegisterEntity(typeof(PLPNPB));
+            //XafTypesInfo.Instance.RegisterEntity(typeof(PLSystemSetting));
+
+            // osProvider = new XPObjectSpaceProvider(sConnString, null);
+            // objectSpace = osProvider.CreateObjectSpace();
+            // PLSystemSetting SystemSetting = objectSpace.FindObject<PLSystemSetting>("Oid > 0 ");
+
+            string oradb = ConfigurationManager.AppSettings["ConnectionStringado"];//"Data Source=ORCL;User Id=hr;Password=hr;";
+            //string oradb = ConfigurationManager.AppSettings["ConnectionString"];
+            OracleConnection conn = new OracleConnection(oradb);  // C#
+            XPObjectSpaceProvider osProvider;
+            IObjectSpace objectSpace;
+            XpoTypesInfoHelper.GetXpoTypeInfoSource();
+            XafTypesInfo.Instance.RegisterEntity(typeof(PLPNPB));
+            XafTypesInfo.Instance.RegisterEntity(typeof(PLSystemSetting));
+            XafTypesInfo.Instance.RegisterEntity(typeof(PLeMailHistory));
+            XafTypesInfo.Instance.RegisterEntity(typeof(PLeMailSetting));
+            osProvider = new XPObjectSpaceProvider(sConnString, null);
+
+            objectSpace = osProvider.CreateObjectSpace();
+            //CloseConnPelaut();
+
+            _Process = false;
+            sFilter = null;
+            try
+            {
+                filterOperator = CriteriaOperator.Parse(sFilter);
+                foreach (PLSystemSetting SystemSetting in objectSpace.GetObjects<PLSystemSetting>(filterOperator))
+                {
+                    if (SystemSetting != null)
+                    {
+                        //SystemSetting.Oid
+                        if (SystemSetting.SOASimAppsId != "")
+                        {
+                            AppId = SystemSetting.SOASimAppsId;
+                        }
+                        if (SystemSetting.SOASimrouteId != "")
+                        {
+                            routeId = SystemSetting.SOASimrouteId;
+                        }
+                        if (SystemSetting.SOASimKodeKL != "")
+                        {
+                            KodeKL = SystemSetting.SOASimKodeKL;
+                        }
+                        if (SystemSetting.SOASimKodeEselon1 != "")
+                        {
+                            KodeEselon1 = SystemSetting.SOASimKodeEselon1;
+                        }
+                        if (SystemSetting.SOASimKodeSatker != "")
+                        {
+                            KodeSatker = SystemSetting.SOASimKodeSatker;
+                        }
+                        if (SystemSetting.SOASimJenisPNBP != "")
+                        {
+                            JenisPNBP = SystemSetting.SOASimJenisPNBP;
+                        }
+                        if (SystemSetting.SOASimUserId != "")
+                        {
+                            UserId = Convert.ToInt16(SystemSetting.SOASimUserId);
+                        }
+                        if (SystemSetting.SOASimPassword != "")
+                        {
+                            Password = SystemSetting.SOASimPassword;
+                        }
+                    }
+                }
+            }
+              catch (Exception ex)
+            {
+                _Process = true;
+                WriteToFile(ex.ToString());
+                //return "foreach (PLSystemSetting SystemSetting" + ex.ToString();
+            }
+
+
+9. delete collection
+ObjectSpace os = Application.CreateObjectSpace();
+    XPCollection<DomainObject1> coll = new XPCollection<DomainObject1>(os.Session, CriteriaOperator.Parse("Validated = ?",false));
+    os.Session.Delete(coll);
+    os.CommitChanges();
+
+
+10. remove the new buttom
+
+using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.SystemModule;
+// ...
+public class DeactivateNewActionInLookupsController : ViewController<ListView> {
+    protected override void OnActivated() {
+        base.OnActivated();
+        if (Frame.Context == TemplateContext.LookupControl || Frame.Context == TemplateContext.LookupWindow) {
+            NewObjectViewController controller = Frame.GetController<NewObjectViewController>();
+            if (controller != null) {
+                controller.NewObjectAction.Active.SetItemValue("LookupListView", false);
+            }
+        }
+    }
+}
+
+11. linq select
+   List<InfoOfClass> aoInfoOfClassHasXlsData = aoInfoOfClass.Where(a => a.ColomXls >= 0).ToList();
+
+
+   var query = feeAllRecords
+    .GroupBy(f => new { f.AccountNo, f.FeeTypeID })
+    .Select(group => new { fee = group.Key, total = group.Sum(f => f.FeeAmount) });
+
+
+   LINQ Operators and Lambda Expressions
+
+12 . CRETERIA
+
+XPCollection<User> managers = new XPCollection<User>(session1, 
+    new ContainsOperator(nameof(User.Roles), new BinaryOperator("This", managerRole)));
+
+
+13. LINQ GROUP BY 
+ DateTime qSalesOutmaxDate = SalesOut.Max(x => x.Salesdate);
+            var qSalesOutMonth = SalesOut
+                        .GroupBy(f => new { f.Salesdate  })
+                        .Select(group => new { saleout = group.Key });
+
+            foreach (var item in qSalesOutMonth)
+            {
+                ProcessToBreakDown(item.saleout.Salesdate);
+            }
+
+
+
+14. ENABEL
+[Appearance("Single", Visibility = ViewItemVisibility.Hide, Criteria = "!IsMarried", Context="DetailView")]
+[Appearance("AddressOneIsEmpty", Enabled = false, Criteria = "IsNullOrEmpty(Address1)", Context="DetailView")]
+
+
+15. rizise 
+
+<head>
+    ...
+    <style type="text/css">
+        .xafPopup.dxbs-popup {
+            max-width: 1000px!important;
+        }
+    </style>
+</head>
+
+16. UNIQKEY
+
+//...
+[RuleCombinationOfPropertiesIsUnique("SampleRule", DefaultContexts.Save, "Description, Id")]
+public class SampleClass : BaseObject {
+    private int id;
+    private string description;
+
+    public SampleClass(Session session) : base(session) { }
+
+    public int Id {
+        get { return id; }
+        set { SetPropertyValue(nameof(Id), ref id, value); }
+    }
+    public string Description {
+        get { return description; }
+        set { SetPropertyValue(nameof(Description), ref description, value); }
+    }
+}
+//...
+
+
+LINQ is a cool feature in C# 3.0. Most of the developers are struggling for the syntax and examples. Here I have collected various examples for each operator in LINQ and the equivalent Lambda Expressions.
+
+Where
+IEnumerable<Product> x = products.Where(p => p.UnitPrice >= 10);  
+  
+IEnumerable<Product> x =  
+from p in products  
+where p.UnitPrice >= 10  
+select p;  
+Select
+IEnumerable<string> productNames = products.Select(p => p.Name);  
+IEnumerable<string> productNames = from p in products select p.Name;  
+  
+var namesAndPrices =  
+products.  
+Where(p => p.UnitPrice >= 10).  
+Select(p => new { p.Name, p.UnitPrice }).  
+ToList();  
+IEnumerable<int> indices =  
+products.  
+Select((product, index) => new { product, index }).  
+Where(x => x.product.UnitPrice >= 10).  
+Select(x => x.index);  
+SelectMany
+IEnumerable<Order> orders =  
+customers.  
+Where(c => c.Country == "Denmark").  
+SelectMany(c => c.Orders);  
+var namesAndOrderIDs =  
+customers.  
+Where(c => c.Country == "Denmark").  
+SelectMany(c => c.Orders).  
+Where(o => o.OrderDate.Year == 2005).  
+Select(o => new { o.Customer.Name, o.OrderID });  
+var namesAndOrderIDs =  
+customers.  
+Where(c => c.Country == "Denmark").  
+SelectMany(c => c.Orders, (c,o) => new { c, o }).  
+Where(co => co.o.OrderDate.Year == 2005).  
+Select(co => new { co.c.Name, co.o.OrderID });  
+  
+var namesAndOrderIDs =  
+from c in customers  
+where c.Country == "Denmark"  
+from o in c.Orders  
+where o.OrderDate.Year == 2005  
+select new { c.Name, o.OrderID };  
+Take
+IEnumerable<Product> MostExpensive10 =products.OrderByDescending(p => p.UnitPrice).Take(10);  
+Skip
+IEnumerable<Product> AllButMostExpensive10 = products.OrderByDescending(p => p.UnitPrice).Skip(10);  
+TakeWhile SkipWhile
+s.TakeWhile(p) s.SkipWhile(p)   
+Join
+var custOrders = customers.  
+Join(orders, c => c.CustomerID, o => o.CustomerID, (c, o) => new {  
+    c.Name, o.OrderDate, o.Total  
+});  
+var custOrders = from c in customers  
+join o in orders on c.CustomerID equals o.CustomerID  
+select new {  
+    c.Name, o.OrderDate, o.Total  
+};  
+GroupJoin
+var custTotalOrders = customers.  
+GroupJoin(orders, c => c.CustomerID, o => o.CustomerID, (c, co) => new {  
+    c.Name, TotalOrders = co.Sum(o => o.Total)  
+});  
+var custTotalOrders = from c in customers  
+join o in orders on c.CustomerID equals o.CustomerID into co  
+select new {  
+    c.Name, TotalOrders = co.Sum(o => o.Total)  
+};  
+var custTotalOrders = from c in customers  
+join o in orders on c.CustomerID equals o.CustomerID  
+select new {  
+    c.Name, o.OrderDate, o.Total  
+};  
+var custTotalOrders = from c in customers  
+join o in orders on c.CustomerID equals o.CustomerID into co  
+from o in co  
+select new {  
+    c.Name, o.OrderDate, o.Total  
+};  
+var custTotalOrders = from c in customers  
+join o in orders on c.CustomerID equals o.CustomerID into co  
+from o in co.DefaultIfEmpty(emptyOrder)  
+select new {  
+    c.Name, o.OrderDate, o.Total  
+};   
+Concat
+IEnumerable < string > locations = customers.Select(c => c.City).  
+Concat(customers.Select(c => c.Region)).  
+Concat(customers.Select(c => c.Country)).  
+Distinct();  
+IEnumerable < string > locations = new [] {  
+    customers.Select(c => c.City),  
+        customers.Select(c => c.Region),  
+        customers.Select(c => c.Country),  
+}.  
+SelectMany(s => s).  
+Distinct();  
+OrderBy / ThenBy
+IEnumerable<Product> orderedProducts1 =  
+products.  
+OrderBy(p => p.Category).  
+ThenByDescending(p => p.UnitPrice).  
+ThenBy(p => p.Name);  
+IEnumerable<Product> orderedProducts1 =  
+from p in products  
+orderby p.Category, p.UnitPrice descending, p.Name  
+select p;  
+IEnumerable<Product> orderedProducts2 =  
+products.  
+Where(p => p.Category == "Beverages").  
+OrderBy(p => p.Name, StringComparer.CurrentCultureIgnoreCase);  
+IEnumerable<string> orderedProductNames =  
+products.  
+Where(p => p.Category == "Beverages").  
+Select(p => p.Name).  
+OrderBy(x => x);  
+GroupBy
+IEnumerable<IGrouping<string, Product>> productsByCategory =products.GroupBy(p => p.Category);  
+IEnumerable<IGrouping<string, string>> productNamesByCategory =products.GroupBy(p => p.Category, p => p.Name);  
+Distinct
+IEnumerable<string> productCategories =products.Select(p => p.Category).Distinct();  
+AsEnumerable
+Table<Customer> custTable = GetCustomersTable();  
+var query = custTable.AsEnumerable().Where(c => IsGoodCustomer(c));  
+ToArray
+string[] customerCountries =customers.Select(c => c.Country).Distinct().ToArray();  
+ToList
+List<Customer> customersWithOrdersIn2005 =customers.  
+Where(c => c.Orders.Any(o => o.OrderDate.Year == 2005)).  
+ToList();  
+ToDictionary
+Dictionary<int,Order> orders =customers.  
+SelectMany(c => c.Orders).  
+Where(o => o.OrderDate.Year == 2005).  
+ToDictionary(o => o.OrderID);  
+Dictionary<string,decimal> categoryMaxPrice =products.  
+GroupBy(p => p.Category).  
+ToDictionary(g => g.Key, g => g.Group.Max(p => p.UnitPrice));  
+ToLookup
+Lookup<string,Product> productsByCategory =products.ToLookup(p => p.Category);  
+IEnumerable<Product> beverages = productsByCategory["Beverage"];  
+OfType
+List<Person> persons = GetListOfPersons();  
+IEnumerable<Employee> employees = persons.OfType<Employee>();  
+Cast
+ArrayList objects = GetOrders();  
+IEnumerable<Order> ordersIn2005 =  
+objects.  
+Cast<Order>().  
+Where(o => o.OrderDate.Year == 2005);  
+ArrayList objects = GetOrders();  
+IEnumerable<Order> ordersIn2005 =  
+from Order o in objects  
+where o.OrderDate.Year == 2005  
+select o;  
+First
+string phone = "206-555-1212";  
+Customer c = customers.First(c => c.Phone == phone);  
+Single
+int id=12345;  
+Customer c = customers.Single(c => c.CustomerID == id);  
+ElementAt
+Product thirdMostExpensive = products.OrderByDescending(p => p.UnitPrice).ElementAt(2);  
+Range
+int[] squares = Enumerable.Range(0, 100).Select(x => x * x).ToArray();  
+ 
+
+Repeat
+long[] x = Enumerable.Repeat(-1L, 256).ToArray();  
+Empty
+IEnumerable<Customer> noCustomers = Enumerable.Empty<Customer>();  
+Any
+bool b = products.Any(p => p.UnitPrice >= 100 && p.UnitsInStock == 0);  
+All
+IEnumerable<string> fullyStockedCategories =products.  
+GroupBy(p => p.Category).  
+Where(g => g.Group.All(p => p.UnitsInStock > 0)).  
+Select(g => g.Key);  
+Count
+int count = customers.Count(c => c.City == "London");  
+Sum
+int year = 2005;  
+var namesAndTotals = customers.  
+Select(c => new {  
+    c.Name,  
+        TotalOrders = c.Orders.  
+    Where(o => o.OrderDate.Year == year).  
+    Sum(o => o.Total)  
+});  
+Min
+var minPriceByCategory = products.  
+GroupBy(p => p.Category).  
+Select(g => new {  
+    Category = g.Key,  
+        MinPrice = g.Group.Min(p => p.UnitPrice)  
+});  
+Max
+decimal largestOrder = customers.  
+SelectMany(c => c.Orders).  
+Where(o => o.OrderDate.Year == 2005).  
+Max(o => o.Total);  
+Average
+var averageOrderTotals = customers.  
+Select(c => new {  
+    c.Name,  
+        AverageOrderTotal = c.Orders.Average(o => o.Total)  
+});  
+Aggregate
+var longestNamesByCategory = products.  
+GroupBy(p => p.Category).  
+Select(g => new {  
+    Category = g.Key,  
+        LongestName = g.Group.  
+    Select(p => p.Name).  
+    Aggregate((s, t) => t.Length > s.Length ? t : s)  
+});  
+
+Relational Database System
+
+Connection String Sample See Note
+
+Microsoft SQL Server *
+
+XpoProvider=MSSqlServer;Data Source=(local);User ID=username;Password=password;Initial Catalog=database;Persist Security Info=true
+
+*The MS SQL Server data provider is automatically specified if you set the "Initial Catalog" parameter and do not use the word "Provider" (for instance, the "XpoProvider" parameter) in the connection string.
+
+Microsoft Access
+
+XpoProvider=MSAccess;Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\mydatabase.mdb;User Id=admin;Password=;
+
+XpoProvider=MSAccess;Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\mydatabase.accdb;User Id=admin;Password=;
+
+Microsoft SQL Server CE
+
+XpoProvider=MSSqlServerCE;Data Source=MyDatabase.sdf;Password=MyPassword
+
+Oracle Database
+
+XpoProvider=Oracle;Data Source=TORCL;User ID=MyUserName;Password=MyPassword
+
+XpoProvider=ODP;Data Source=TORCL;User ID=MyUserName;Password=MyPassword
+
+XpoProvider=ODPManaged;Data Source=TORCL;User ID=MyUserName;Password=MyPassword
+
+Amazon Redshift
+
+XpoProvider=Amazon Redshift;Server=127.0.0.1;User ID=MyUserName;Password=MyPassword;Database=MyDatabase;Encoding=UNICODE
+
+Google BigQuery
+
+XpoProvider=BigQuery;ProjectID=myProject;DataSetId=myDataSet;OAuthClientId=myClientId;OAuthClientSecret=mySecret;OAuthRefreshToken=myRefreshToken
+
+XpoProvider=BigQuery;ProjectId=project;DatasetId=dataset;ServiceAccountEmail=example@gmail.com;PrivateKeyFileName=key.p12
+
+Teradata
+
+XpoProvider=Teradata;Data Source=myServerAddress;User ID=myUsername;Password=myPassword;
+
+SAP Sybase Advantage
+
+XpoProvider=Advantage;Data Source=\myserver\myvolume\mypat\mydd.add;ServerType=local;User ID=ASSSYS;TrimTrailingSpaces=true
+
+SAP Sybase ASE
+
+XpoProvider=Ase;Port=5000;Data Source=MyAseServer;User ID=MyUserName;Password=MyPassword;Initial Catalog=MyDatabase;Persist Security Info=true
+
+SAP SQL Anywhere
+
+XpoProvider=Asa;eng=server;uid=user;pwd=password;dbn=database;persist security info=true;
+
+IBM DB2
+
+XpoProvider=DB2;Server=server:port;Database=database;UID=user;PWD=password;
+
+Firebird
+
+XpoProvider=Firebird;DataSource=localhost;User=SYSDBA;Password=masterkey;Database=MyDatabase.fdb;ServerType=0;Charset=NONE
+
+MySQL
+
+XpoProvider=MySql;Server=MyServerAddress;User ID=MyUserName;Password=MyPassword;Database=MyDatabase;Persist Security Info= true;Charset=utf8
+
+Pervasive PSQL
+
+XpoProvider=Pervasive;Server=MyServerAddress;UID=MyUserName;PWD=MyPassword;ServerDSN=MyDatabase
+
+PostgreSQL
+
+XpoProvider=Postgres;Server=127.0.0.1;User ID=MyUserName;Password=MyPassword;Database=MyDatabase;Encoding=UNICODE
+
+VistaDB
+
+XpoProvider=VistaDB;Data Source=C:\mydatabase.vdb4
+
+XpoProvider=VistaDB5;Data Source=C:\mydatabase.vdb5
+
+SQLite
+
+XpoProvider=SQLite;Data Source=filename
+
+XML file
+
+XpoProvider=InMemoryDataStore;data source=D:\Contacts.xml;read only=True
+
+
+// add action
+using System;
+using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.Actions;
+using DevExpress.Persistent.Base;
+using MySolution.Module.BusinessObjects;
+
+//...
+public partial class ClearContactTasksController : ViewController {
+    public ClearContactTasksController() {
+        InitializeComponent();
+        TargetViewType = ViewType.DetailView;
+        TargetObjectType = typeof(Contact);
+    }
+// ...
+

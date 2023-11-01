@@ -1,0 +1,47 @@
+﻿ubag ico p
+
+.header-logo {
+    -webkit-mask: url('../images/Logo.svg');
+    mask: url('../images/Logo.svg');
+
+mapping table to be import 
+ 1. passing object name
+ 2. pdate colom dengan nama kolom.
+
+
+ https://xafmarin.com/xaf-blazor-ui-while-waiting-for-a-feature-release/
+
+
+ import 
+ 1. check max colom in xls to e upload
+ 2. verifiy data
+ 3. create seaching query
+ 4. reday to get data
+ 5. ADA ERROR JUKA  ISSEARCH NYA BANYAK
+ 6. colom dengan xls -1
+ 7. TAMPILKAN KOLOM YG AKAN DI IMPORT SAJA.
+
+
+ 1. diplacement --> DETAILER . --> SALES OUT -- PILIHAN 
+2. price  -->  masa berlaku, digunakan  pada saat salaet out.
+3. history detailer & outlet
+4. 
+   
+3. form KO  
+3. 
+
+1. master price .
+2. 
+
+sm yg terakhir.
+
+DBL143
+
+tgl perkiraan tiba.
+
+j3A7w7TZ
+
+j3A7w7TZ
+
+
+ FormatString('{0:N0}',[Surat Muat Detail].[Jumlah Original])

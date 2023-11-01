@@ -1,0 +1,101 @@
+﻿ubag ico p
+
+.header-logo {
+    -webkit-mask: url('../images/Logo.svg');
+    mask: url('../images/Logo.svg');
+
+mapping table to be import 
+ 1. passing object name
+ 2. pdate colom dengan nama kolom.
+
+
+ https://xafmarin.com/xaf-blazor-ui-while-waiting-for-a-feature-release/
+
+
+ import 
+ 1. check max colom in xls to e upload
+ 2. verifiy data
+ 3. create seaching query
+ 4. reday to get data
+ 5. ADA ERROR JUKA  ISSEARCH NYA BANYAK
+ 6. colom dengan xls -1
+ 7. TAMPILKAN KOLOM YG AKAN DI IMPORT SAJA.
+
+
+
+
+
+ NOTA
+ 1. NEW &  DELETE DI HAPUS --> ok.
+ 2. list screeen nota -->0k
+ 3. penomoran nota
+ 4. tanggal nota. --> ok
+ 5. PPN tick  -> ok 
+ 6. SM -- YG BISA DI EDIT HANYA DP DAN ORIGINAL
+ 7. LOOP UP PELANGGAN  --> OK
+ 8. uang muka ti dak update  -->ok
+ 9. tambahkan tagihan --0k>
+ 10. LAIN LAIN TIDK UPATE -->ok
+ 11. hapus total tagihan di dm --> ok
+ 12 set alligment rigt pada screnn
+ 13. nomor dm tidak bisa di ubah. --> ok
+ 14. update surat kembali
+ 15. update surat samapi tujuan
+ 16. disabel nomor nota
+ 17. surat muat yg tampil pada nota hanya : yg belum di buat nota, dan barang sudah sampai.
+ 18. check tidak boleh double
+ 19. TAMBAHKAN FILTEER PADA LOOK UP.
+ 20. Surat Muat list view -- variant 
+
+
+ dm detail
+
+ 21. ONGKOS UPDATE ONGKOS ORG 
+
+
+ daftar tagih
+ 1. tanggal ambil dari syste
+ 2. LOOK UP NOTA
+
+
+
+
+ NOMOR PELANGGAN --> ok
+
+ PRINT DM
+ PRINT SM
+
+ 
+
+
+
+ 1. NOMOR DM ATOMATIS --> ok
+ 2. PASA SAAT AMBIL NOMOR TRUK,
+    LANSUNG TAMPIL SUPRI & NOMOR HP   --> ok
+ 3. PAD LOOK UP NOMOR TRUK TAMPILKAN NAMA DAN NOMOR HP
+ 4 . ONGKOS LAIN LAIN DI BUAT ENTRYA FLEKSIBLE
+5. numbering DM --> OK.
+6. TRUK LOOK UP
+7. 
+
+
+
+LX - 
+
+CREATE NOTA 
+TGL DM.
+
+
+j3A7w7TZ
+password server : 3Jasautama
+
+
+
+1. linke 
+2.  pindahkan ke sisis
+3. jika akan di edit di update
+3. save
+   -- pindahkan ke komisi detail
+     
+
+     Bahnschrift

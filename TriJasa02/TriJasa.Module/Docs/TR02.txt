@@ -1,0 +1,96 @@
+﻿using System.Linq;
+using System.Linq.Expressions;
+using DevExpress.Xpo;
+
+XPQuery<Customer> customers = Session.DefaultSession.Query<Customer>();
+XPQuery<Order> orders = Session.DefaultSession.Query<Order>();
+XPQuery<Employee> employees = Session.DefaultSession.Query<Employee>();
+
+// Simple Select with Where and OrderBy clauses
+var list = from c in customers
+           where (c.Country == "Germany" && c.ContactTitle == "Sales Representative")
+           orderby c.ContactName
+           select c;
+foreach (Customer cust in list)
+    Console.WriteLine(string.Format("{0}\t{1}\t{2}", cust.ContactName,
+        cust.Country, cust.ContactTitle));
+
+// Select Top 5 objects
+var list = (from o in orders
+            orderby o.ShippedDate descending
+            select o).Take(5);
+foreach (Order order in list)
+    Console.WriteLine(string.Format("{0}\t{1}\t{2}", order.OrderID, order.ShippedDate,
+        order.Customer.CompanyName));
+
+// Group Join customers with an aggregation on their Orders
+var list = from c in customers
+           join o in orders on c equals o.Customer into oo
+           where oo.Count() >= 1
+           select new { c.CompanyName, OrderCount = oo.Count() };
+foreach (var item in list)
+    Console.WriteLine(string.Format("{0}\t{1}", item.CompanyName, item.OrderCount));
+
+// An example of aggregated functions (Count and Average)
+var list = from o in orders
+           select o;
+int count = list.Count();
+Console.WriteLine(string.Format("Orders Row Count: {0}", count));
+
+decimal avg = list.Average(x => x.Freight);
+Console.WriteLine(string.Format("Orders Average Freight: {0:c2}", avg));
+
+// Select with Group By
+var list = from c in customers
+           group c by c.ContactTitle into cc
+           where cc.Count() >= 1
+           select new { Title = cc.Key, Count = cc.Count() };
+foreach (var item in list)
+    Console.WriteLine(string.Format("{0}\t{1}", item.Title, item.Count));
+
+// Any method 
+bool result = customers.Any(c => c.Country == "Spain");
+Console.WriteLine(string.Format("Is there any customer from Spain? {0}", result ? "Yes" : "No"));
+
+result = customers.Any(c => c.Country == "Monaco");
+Console.WriteLine(string.Format("Is there any customer from Monaco? {0}", result ? "Yes" : "No"));
+
+
+
+using(UnitOfWork uow = new UnitOfWork()) {
+    // Create a new object within a Unit of Work
+    Person p = new Person(uow);
+    p.Name = "Bob";
+    p.Location = "U.S.";
+
+    // Save all the changes made
+    uow.CommitChanges();
+}
+
+
+
+private void EmployeeMonthSheetReport_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e) {  
+
+    var daySheets= this.DataSource as System.Collections.Generic.IList<ZeitKIT.Model.EmployeeDaySheet>;  
+
+    if (daySheets!= null)  
+    {  
+        this.Parameters["ActualTotalHours"].Value =  
+            daySheets.Sum(x => x.ActualWorkingTime).ToShortTimeString();  
+
+        this.Parameters["TargetTotalHours"].Value = 2;  
+            //daySheets.Sum(x => x.TargetWorkingTime).ToShortTimeString();  
+
+        this.Parameters["EndTotalBalance"].Value = 2;  
+            //daySheets.OrderByDescending(x => x.Date)  
+            //       .FirstOrDefault().TotalBalanceText;  
+    }  
+}  
+
+
+
+[PersistentAlias("Rate * Hours")]
+    public double Amount {
+        get { return (double)(EvaluateAlias(nameof(Amount)) ?? 0); }
+    }
+

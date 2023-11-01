@@ -1,0 +1,187 @@
+﻿1. MASTER TUJUAN ==> MASTCUSD
+2. MASTER PELANGGAN ==> MASTCUST
+3. POOL SUPUR   --ok ->
+ --- group supir .  --> ok
+
+
+DM 
+
+4. -- bisa pilih supir & truck
+
+5. biaya lain lan  -->  biaya lain lain + klaim
+     ubah menjadi --Klaim 
+     pada saat entry  DM , 
+     angka klaim langsung masuk ke kolom SUPIR.
+
+
+6. administartsi  = administrasi 1 + administratsi 2
+
+SM --> PEBAYARAN 
+
+SM : DM/001/TANDATERIMA  
+8879
+
+7. JENIS BARANG ADA MASTER 
+   - PADA SAAT ENTRY JENIS BARANG .
+     BISA MENCARI YG SUDAH DI ENTRY 
+ 
+8. JUMLAH = KG * ONGKOS  --> ok
+9. JUMLAH ORGINAL = KG * ONGKOS ORIGINAL -->ok
+
+10. PEMABYARAN --> UBAH MENJADI PILIH . MENGUNAKA CLICK.
+
+11. ADA OUT STADING 
+
+12 . SISA/FL --> jumlah tagih - (dibayar + loco)
+
+
+DBL.H0061
+
+nomor DBL  -- DM  -. darat bali lombok
+
+TAHUN +BULAN + NOMOR URUT / NOMOR URUT SM / TTB
+DBL.2102.001/012/TANDATERIMA 
+
+12. MASTER GROUP SUPIR.
+    
+
+============== NOTA =================
+
+-- LANGSUNG, ADA PROSES BUAT NOTA DI DM ;  -->ok
+   -  UNTUK PROSES NOTA ADALAH PROSES PEMBAYARAN MENGUNAKAN PRANKO.
+- PRANGKO LANGSUNG BUAT NOTA. --->OK
+
+TAHUN BULAN . NMOR URUT DM . NOMOR URUT BULAN
+2102.001.012
+
+PENOMORAN NOTA :
+
+2102: TAHUN BULAN  -->OK
+2102.001 : NOMOR URUT DM   -->OK
+012 : NOMUR URUT SM   -->OK
+
+2 SM BISA DIJADIKAN 1 NOTA. 
+DENGAN NOMOR NOTA DIAMBIL YG TER ATAS.  -->OK
+
+3. ADA CICIL BAYAR .
+
+===========PENERIMAAN KASIR  =====
+1. TANGGAL SESUAI HARI .
+2. PADA  PEMBUATAN SM LANGSUNG CHECK PEMBAUTAN CHASH
+
+=============== PELANGGAN ==============
+MASUKA NOMOR NPWP & TAX ..
+
+
+====== KLAIM  SUPIR =======
+1. PELANGAN MELANGAJUKAN KLAIM KE KANTOR
+   -- ENTRY BERDASARKAN  DM/SM 
+      -- TOTAL POTANGAN & KETERANGAN KLAIM 
+2. PADA DATA SUPIR ADA HISTORY/CARD KLAIM 
+
+KEKURANGAN PEMBAYARAN DIMASUKAN KE SUPIR .
+   
+
+PENGAJUAN kLAIM . 
+
+
+
+
+CARA ENTRY KLAIM
+1. PELUNASAN PEMBAYARAN  (MASUK KOLOM POTONGAN)
+2. KLAIM YG DI AJUKAN . TAMBAHAN ENTRY KLAIM 
+
+
+================== NOTA ===============
+
+2.  LAPORAN SELISIH JUMLAH DAN ORIGINAL, PEMBAYRAN 
+3.  PENGAJUAN KOMISI -- > ENTRY PEMBAYARAN KOMISI.
+4.  PRINT NOTA . ADA STATUS PRINT.
+5.  KBA -->  RINCIAN JENIS BARANG   FORMAT NOTA DI PISAHKAN 
+6.  ALAMAT KANTOR TRIJASA -
+7. JATUH TEMPO FAKTUR .
+
+
+================= DAFTAR TAGIH================
+daftar tagih status .
+
+================== GENERAL BIAYA ==
+
+FIX KODE BIAYA.
+
+
+
+
+==================
+update screen tujuan kirim 
+======= import ===========
+Puir Id = hide.
+
+==================== ENTRY DM - ANDRI ===============
+1. TOTAL JUMLAH BELUM  MUNCUL DI DM . --> ok
+2. TULISAN KOLO MEMBAYARAN KURANG M --> ok
+3. JUMLAH TAGIHAN TIDAK MUNCUL . -->ok
+4. NOMOR SM TIDAK TAMPIL.
+5. UANG MUKA .  MUNCUL NYA DIMANA ... 
+
+6. jenis BARANG WAJIM DIISI
+
+
+
+=============== KAS 7 BANK  ===================
+KAS & BANK
+
+- TAMBAHKAN KODE ACCOUNT BANK
+- TAMBAHKAN AMOUT  -->
+-- tambahkan nomor giro & jatuh tempo. --ok
+
+
+- bisa edit di grid
+pada saat pilih type
+check apakah ada account bank.
+jika tidak ada tambhakan di grid.
+
+jika pilih nya pelanggan,
+masukan account piutanh
+tambhak
+insert ke data mebayaran
+
+jika pilih nya komisi
+masukan accoutn komisi
+
+-- PADA SAAT SAVE CHECK APAKAH ADA ACCOUNT BANK DI DETAIL
+-- PADA SAAT CHECK APAKAH AMAOUNT NYA SAMA DENGAN NILAI ACCOUNT BANK
+-- PADA pilih customer , 
+
+
+=========================000========================
+-- HIDE EDIT BUTTON PADA PENERIMAAN KAS
+
+
+TGL 7 MAR 2021
+===DM===
+
+====DAFTAR TAGIHAN/COLL===
+- NOMOR BLM OTOMATIS UPDATE URUTAN(NEW)
+-NOTA YG SUDAH DIPILIH U DIBAWA COLLECTOR BISA OTOMATIS HILANG BIAR NGGAK PENUH 
+- NOTA YG KEMBALI GMN CARANYA UPDATE BIAR ADA DI DATA LIST NOTA
+
+====DAFTAR TAGIHAN LIST NOTA==
+-STATUS SAMPAI/TDK, GIMANA UPDATE CUKUP PILIHAN CENTANG
+- NEW SCREEN MATIKAN SAJA
+
+
+====NOTA==
+PENAGGAN = PELANGGAN
+
+=== UPDATE ===
+1. PENERIMANAN KASIR NOTED :
+
+
+
+======= bank === 
+
+kode reference 
+
+===== uloade ====
+supir tambahkan nomor HP

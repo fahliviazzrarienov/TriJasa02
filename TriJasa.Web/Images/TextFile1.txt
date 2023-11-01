@@ -1,0 +1,31 @@
+﻿ <script type="text/javascript">
+        var isStarteddByAddNewRow = false;
+        function OnInit(s, e) {
+            isStarteddByAddNewRow = true;
+            s.AddNewRow();
+            s.batchEditApi.EndEdit();
+
+        }
+
+        function onKeyPress(s, e) {
+            if (e.htmlEvent.keyCode == 9) {
+                ASPxClientUtils.PreventEventAndBubble(e.htmlEvent);
+                $(".commandlink").focus();
+            }
+        }
+
+        function OnBatchEditStartEditing(s, e) {
+
+
+            if (isStarteddByAddNewRow) {
+                isStarteddByAddNewRow = false;
+                return;
+            }
+            if (e.visibleIndex == -1 * s.GetVisibleRowsOnPage()) {
+                isStarteddByAddNewRow = true;
+                s.AddNewRow();
+                s.batchEditApi.StartEdit(e.visibleIndex, e.focusedColumn.index);
+
+            }
+        }
+    </script>

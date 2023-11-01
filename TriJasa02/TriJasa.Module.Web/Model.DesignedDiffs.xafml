@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Options CollectionsEditMode="Edit" />
+  <SchemaModules>
+    <SchemaModule Name="SchedulerAspNetModule" Version="20.2.5.0" IsNewNode="True" />
+    <SchemaModule Name="SchedulerModuleBase" Version="20.2.5.0" IsNewNode="True" />
+    <SchemaModule Name="SystemAspNetModule" Version="20.2.5.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="20.2.5.0" IsNewNode="True" />
+  </SchemaModules>
+  <ViewItems>
+    <PropertyEditor Name="PropertyEditors">
+      <RegisteredPropertyEditor PropertyType="System.Drawing.Color" EditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxColorPickerPropertyEditor" />
+    </PropertyEditor>
+  </ViewItems>
+  <Views>
+    <DetailView Id="CBBankTran_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="Krani" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="Pelanggan" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="TransCode" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="CBBankTran_ListView_Entry">
+      <Columns>
+        <ColumnInfo Id="Pelanggan" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Columns>
+    </ListView>
+    <ListView Id="CBTransKas_TransKasDtl_ListView_Entry" InlineEditMode="Batch" SaveStateInCookies="True" DataAccessMode="Client">
+      <Columns>
+        <ColumnInfo Id="TransCode" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Columns>
+    </ListView>
+    <DetailView Id="DaftarMuatan_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="NoTruck" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="NamaSpr" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="DaftarTagihan_DetailView">
+      <Items>
+        <PropertyEditor Id="NamaColl" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="DaftarTagihan_ListNotaTagih_ListView">
+      <Columns>
+        <ColumnInfo Id="Nota" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ImportColomn_DetailView">
+      <Items>
+        <PropertyEditor Id="ObjectName" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxObjectPropertyEditor" />
+        <PropertyEditor Id="xlsName" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="ImportFiles_Colomn_ListView">
+      <Columns>
+        <ColumnInfo Id="xlsName" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Columns>
+    </ListView>
+    <DetailView Id="KasBon_DetailView">
+      <Items>
+        <PropertyEditor Id="Nama" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="KasBon_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="Nama" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="Nota_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="Pelangan" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="Nota_ListView" DataAccessMode="Client">
+      <Columns>
+        <ColumnInfo Id="SysImportNo" Index="-1" />
+        <ColumnInfo Id="TotalSM" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="NotaPayment_ListNota_ListView_Entry" InlineEditMode="EditForm" />
+    <ListView Id="NotaPayment_ListView" DataAccessMode="Client" />
+    <ListView Id="NotaPayment_LookupListView" DataAccessMode="Client" />
+    <ListView Id="NotaPayment_NotaPaymentDtl_ListView">
+      <Columns>
+        <ColumnInfo Id="Faktur" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Columns>
+    </ListView>
+    <ListView Id="NotaPaymentDtl_ListView" DataAccessMode="Client" />
+    <ListView Id="NotaPaymentDtl_LookupListView" DataAccessMode="Client" />
+    <DetailView Id="PenerimaanKasir_DetailView">
+      <Items>
+        <PropertyEditor Id="Pengirim" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="Supir_DetailView">
+      <Items>
+        <PropertyEditor Id="Group" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="SupirKlaim_DetailView">
+      <Items>
+        <PropertyEditor Id="DM" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="Supir" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="SupirKlaim_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="DM" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="Supir" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="SuratMuatan_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="Pelanggan" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="Dikerimke" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="SuratMuatan_SuratMuatDtl_ListView_Entry" InlineEditMode="Batch" DataAccessMode="Client" IsAdaptive="False">
+      <Columns>
+        <ColumnInfo Id="Unit" MaxLength="20" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

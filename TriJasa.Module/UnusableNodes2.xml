@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="SuratMuatan_DetailView_Copy">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="SuratMuatan">
+              <LayoutGroup Id="SuratMuatan_col2">
+                <LayoutItem Id="oNomorDM" ViewItem="oNomorDM" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Nota_DetailView_Entry">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="NotaDtl">
+              <LayoutItem Id="NotaDtl" ViewItem="NotaDtl" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="DaftarTagihan_DetailView_Copy">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="ListNotatagih_Group">
+            <LayoutItem Id="ListNotatagih" ViewItem="ListNotatagih" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="DaftarMuatan_ListView_Copy_Copy">
+      <Columns Id="Columns">
+        <ColumnInfo Id="OngkosLain3" PropertyName="OngkosLain3" Width="50" Index="19" />
+        <ColumnInfo Id="OngkosLain2" PropertyName="OngkosLain2" Width="50" Index="18" />
+        <ColumnInfo Id="OngkosLain1" PropertyName="OngkosLain1" Width="50" Index="17" />
+      </Columns>
+    </ListView>
+    <ListView Id="DaftarMuatan_ListView_All">
+      <Columns Id="Columns">
+        <ColumnInfo Id="OngkosLain3" PropertyName="OngkosLain3" Width="50" Index="19" />
+        <ColumnInfo Id="OngkosLain2" PropertyName="OngkosLain2" Width="50" Index="18" />
+        <ColumnInfo Id="OngkosLain1" PropertyName="OngkosLain1" Width="50" Index="17" />
+      </Columns>
+    </ListView>
+    <DetailView Id="DaftarMuatan_DetailView_Copy">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="DaftarMuatan">
+              <LayoutGroup Id="DaftarMuatan_col2">
+                <LayoutItem Id="BiayaLain3" ViewItem="BiayaLain3" />
+                <LayoutItem Id="BiayaLain2" ViewItem="BiayaLain2" />
+              </LayoutGroup>
+              <LayoutGroup Id="DaftarMuatan_col1">
+                <LayoutItem Id="Penerima" ViewItem="Penerima" />
+                <LayoutItem Id="TTB" ViewItem="TTB" />
+                <LayoutItem Id="Pengirim" ViewItem="Pengirim" />
+                <LayoutItem Id="NomorSM" ViewItem="NomorSM" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+      <Items Id="Items">
+        <PropertyEditor Id="OngkosLain3" PropertyName="OngkosLain3" />
+        <PropertyEditor Id="OngkosLain2" PropertyName="OngkosLain2" />
+        <PropertyEditor Id="OngkosLain1" PropertyName="OngkosLain1" />
+      </Items>
+    </DetailView>
+    <DetailView Id="DaftarMuatan_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="OngkosLain1" Index="19" />
+        <PropertyEditor Id="OngkosLain2" Index="20" />
+        <PropertyEditor Id="OngkosLain3" Index="21" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="DaftarMuatan">
+              <LayoutGroup Id="DaftarMuatan_col1">
+                <LayoutItem Id="Administrasi" Index="5" RelativeSize="36.61257606490872" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="DaftarMuatan_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="OngkosLain1" Index="-1" />
+        <ColumnInfo Id="OngkosLain2" Index="-1" />
+        <ColumnInfo Id="OngkosLain3" Index="-1" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

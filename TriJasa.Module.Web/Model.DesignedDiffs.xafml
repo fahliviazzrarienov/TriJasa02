@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Options CollectionsEditMode="Edit" ConfirmUnsavedChanges="True" />
+  <SchemaModules>
+    <SchemaModule Name="SchedulerAspNetModule" Version="20.2.5.0" IsNewNode="True" />
+    <SchemaModule Name="SchedulerModuleBase" Version="20.2.5.0" IsNewNode="True" />
+    <SchemaModule Name="SystemAspNetModule" Version="20.2.5.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="20.2.5.0" IsNewNode="True" />
+  </SchemaModules>
+  <ViewItems>
+    <PropertyEditor Name="PropertyEditors">
+      <RegisteredPropertyEditor PropertyType="System.Drawing.Color" EditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxColorPickerPropertyEditor" />
+    </PropertyEditor>
+  </ViewItems>
+  <Views>
+    <DetailView Id="CBBankTran_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="Krani" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="Pelanggan" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="TransCode" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="CBBankTran_ListView_Entry">
+      <Columns>
+        <ColumnInfo Id="Pelanggan" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Columns>
+    </ListView>
+    <ListView Id="CBTransKas_TransKasDtl_ListView_Entry" InlineEditMode="Batch" SaveStateInCookies="True" DataAccessMode="Client">
+      <Columns>
+        <ColumnInfo Id="TransCode" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Columns>
+    </ListView>
+    <DetailView Id="DaftarMuatan_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="NoTruck" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="NamaSpr" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="DaftarMuatanLaut_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="Kapal" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="supplier" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="tujuan" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="DaftarMuatanLaut_ListView_Entry">
+      <Columns>
+        <ColumnInfo Id="Tanggal" Index="1" />
+        <ColumnInfo Id="JmlColly" Index="4" />
+        <ColumnInfo Id="JmlTagihan" Index="5" />
+        <ColumnInfo Id="JmlTagihanOrg" Index="6" />
+      </Columns>
+    </ListView>
+    <DetailView Id="DaftarTagihan_DetailView">
+      <Items>
+        <PropertyEditor Id="NamaColl" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="DaftarTagihan_ListNotaTagih_ListView">
+      <Columns>
+        <ColumnInfo Id="Nota" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ImportColomn_DetailView">
+      <Items>
+        <PropertyEditor Id="ObjectName" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxObjectPropertyEditor" />
+        <PropertyEditor Id="xlsName" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="ImportFiles_Colomn_ListView">
+      <Columns>
+        <ColumnInfo Id="xlsName" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Columns>
+    </ListView>
+    <DetailView Id="KasBon_DetailView">
+      <Items>
+        <PropertyEditor Id="Nama" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="KasBon_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="Nama" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="Nota_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="Pelangan" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="Nota_ListView" DataAccessMode="Client">
+      <Columns>
+        <ColumnInfo Id="SysImportNo" Index="-1" />
+        <ColumnInfo Id="TotalSM" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="Nota_ListView_Entry" FreezeColumnIndices="True" PageSize="10">
+      <Columns>
+        <ColumnInfo Id="DM" Index="-1" />
+        <ColumnInfo Id="Note1" Index="-1" />
+        <ColumnInfo Id="Note2" Index="-1" />
+        <ColumnInfo Id="Note3" Index="-1" />
+        <ColumnInfo Id="Oid" Index="-1" />
+        <ColumnInfo Id="Pelangan" Index="-1" />
+        <ColumnInfo Id="PelangganAlamat1" Index="-1" />
+        <ColumnInfo Id="PelangganAlamat2" Index="-1" />
+        <ColumnInfo Id="PelangganAlamat3" Index="-1" />
+        <ColumnInfo Id="PelangganTelp" Index="-1" />
+        <ColumnInfo Id="PmtAdjutment" Index="-1" />
+        <ColumnInfo Id="PmtDiterima" Index="-1" />
+        <ColumnInfo Id="PmtPotongan" Index="-1" />
+        <ColumnInfo Id="SysImportNo" Index="-1" />
+        <ColumnInfo Id="TotalSM" Index="-1" />
+        <ColumnInfo Id="WithPPN" Index="-1" />
+        <ColumnInfo Id="NoNota" Index="0" />
+        <ColumnInfo Id="Tanggal" Index="2" />
+        <ColumnInfo Id="NoTTDSM" Index="3" />
+        <ColumnInfo Id="PelanganNama" Index="6" />
+        <ColumnInfo Id="SuratMuat" Index="11" />
+        <ColumnInfo Id="TotalJml" Index="13" />
+        <ColumnInfo Id="UangMuka" Index="15" />
+        <ColumnInfo Id="Lainlain" Index="16" />
+        <ColumnInfo Id="Nett" Index="17" />
+        <ColumnInfo Id="PPN" Index="18" />
+        <ColumnInfo Id="TotalNO" Index="19" />
+        <ColumnInfo Id="TelahDiTerima" Index="20" />
+        <ColumnInfo Id="Sisa" Index="21" />
+        <ColumnInfo Id="Status" Index="23" />
+        <ColumnInfo Id="Print" Index="24" />
+      </Columns>
+    </ListView>
+    <ListView Id="Nota_SuratMuats_ListView" InlineEditMode="EditForm" />
+    <ListView Id="NotaDtl_ListView" PageSize="10" ShowFindPanel="True" />
+    <ListView Id="NotaPayment_ListNota_ListView_Entry" InlineEditMode="EditForm" />
+    <ListView Id="NotaPayment_ListView" DataAccessMode="Client" />
+    <ListView Id="NotaPayment_LookupListView" DataAccessMode="Client" />
+    <ListView Id="NotaPayment_NotaPaymentDtl_ListView">
+      <Columns>
+        <ColumnInfo Id="Faktur" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Columns>
+    </ListView>
+    <ListView Id="NotaPaymentDtl_ListView" DataAccessMode="Client" />
+    <ListView Id="NotaPaymentDtl_LookupListView" DataAccessMode="Client" />
+    <DetailView Id="PenerimaanKasir_DetailView">
+      <Items>
+        <PropertyEditor Id="Pengirim" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="SMKomisi_ListSM_ListView_Entry" InlineEditMode="Batch" />
+    <ListView Id="SMKomisi_ListSM_Lookup" PageSize="10" />
+    <ListView Id="SMKomisi_ListSMKomisiItem_ListView_Entry" InlineEditMode="Batch" SaveStateInCookies="True" />
+    <DetailView Id="Supir_DetailView">
+      <Items>
+        <PropertyEditor Id="Group" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="SupirKlaim_DetailView">
+      <Items>
+        <PropertyEditor Id="DM" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="Supir" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="SupirKlaim_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="DM" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="SM" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="Supir" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="SuratMuatan_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="Pelanggan" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="Dikerimke" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <DetailView Id="SuratMuatan_DetailView_Laut">
+      <Items>
+        <PropertyEditor Id="Dikerimke" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="Pelanggan" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="SuratMuatan_LookupListView_Komisi" DetailRowMode="DetailView" PageSize="10" SaveStateInCookies="True" DataAccessMode="Client" />
+    <ListView Id="SuratMuatan_SuratMuatDtl_ListView" InlineEditMode="Batch" />
+    <ListView Id="SuratMuatan_SuratMuatDtl_ListView_Entry" InlineEditMode="Batch" DataAccessMode="Client" IsAdaptive="False">
+      <Columns>
+        <ColumnInfo Id="Unit" MaxLength="20" />
+      </Columns>
+    </ListView>
+    <DetailView Id="TarifSM_DetailView_Entry">
+      <Items>
+        <PropertyEditor Id="pelanggan" PropertyEditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxGridLookupPropertyEditor" />
+        <PropertyEditor Id="tarifSMUnit" View="TarifSM_tarifSMUnit_ListView_Entry" />
+      </Items>
+    </DetailView>
+    <ListView Id="TarifSM_ListView_Entry" InlineEditMode="Inline" />
+    <ListView Id="TarifSM_tarifSMUnit_ListView_Entry" DataAccessMode="Client" InlineEditMode="EditForm" ClassName="TriJasa.Module.BusinessObjects.TarifSMHarga" DetailRowView="TarifSMHarga_DetailView_Entry" MasterDetailView="TarifSMHarga_DetailView_Entry" DetailViewID="TarifSMHarga_DetailView_Entry" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Oid" PropertyName="Oid" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TarifSM" PropertyName="TarifSM" Width="400" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Berlaku" PropertyName="Berlaku" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="HargaPerKG" PropertyName="HargaPerKG" Width="50" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="HargaPerM3" PropertyName="HargaPerM3" Width="50" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="HargaPerKGOrg" PropertyName="HargaPerKGOrg" Width="50" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="HargaPerM3Org" PropertyName="HargaPerM3Org" Width="50" Index="5" IsNewNode="True" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

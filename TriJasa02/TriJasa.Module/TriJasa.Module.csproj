@@ -1,0 +1,153 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Deterministic>false</Deterministic>
+		<AssemblyVersion>1.0.*</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<Configurations>Debug;Release;EasyTest</Configurations>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DefineConstants>TRACE;DEBUG</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DefineConstants>TRACE</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'EasyTest|AnyCPU' ">
+		<DefineConstants>TRACE;DEBUG;EASYTEST</DefineConstants>
+	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="BusinessObjects\ImportFiles\ImportColom.cs" />
+	  <Compile Remove="BusinessObjects\ImportFiles\ImportFile.cs" />
+	  <Compile Remove="BusinessObjects\ImportFiles\xlsFileColomName.cs" />
+	  <Compile Remove="BusinessObjects\Lib\AccessParentDetailViewController.cs" />
+	  <Compile Remove="BusinessObjects\Lib\AccessParentDetailViewController.Designer.cs" />
+	  <Compile Remove="BusinessObjects\TriJasa\BankTranRO.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="Model.DesignedDiffs.xafml" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DevExpress.Document.Processor" Version="23.2.1-alpha-23255" />
+		<PackageReference Include="DevExpress.ExpressApp" Version="23.2.1-alpha-23255" />
+		<PackageReference Include="DevExpress.ExpressApp.AuditTrail.Xpo" Version="23.2.1-alpha-23255" />
+		<PackageReference Include="DevExpress.ExpressApp.ConditionalAppearance" Version="23.2.1-alpha-23255" />
+		<PackageReference Include="DevExpress.ExpressApp.ReportsV2" Version="23.2.1-alpha-23255" />
+		<PackageReference Include="DevExpress.ExpressApp.Security.Xpo" Version="23.2.1-alpha-23255" />
+		<PackageReference Include="DevExpress.ExpressApp.Validation" Version="23.2.1-alpha-23255" />
+		<PackageReference Include="DevExpress.ExpressApp.ViewVariantsModule" Version="23.2.1-alpha-23255" />
+		<PackageReference Include="DevExpress.ExpressApp.Xpo" Version="23.2.1-alpha-23255" />
+		<PackageReference Include="DevExpress.Persistent.Base" Version="23.2.1-alpha-23255" />
+		<PackageReference Include="DevExpress.Persistent.BaseImpl.Xpo" Version="23.2.1-alpha-23255" />
+		<PackageReference Include="EntityFramework" Version="6.4.4" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="UnusableNodes.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes1.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes10.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes11.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes12.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes13.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes14.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes15.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes16.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes17.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes18.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes19.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes2.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes20.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes21.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes22.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes23.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes24.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes25.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes26.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes27.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes28.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes29.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes3.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes30.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes31.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes32.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes33.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes4.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes5.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes6.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes7.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes8.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	  <None Update="UnusableNodes9.xml">
+	    <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+	  </None>
+	</ItemGroup>
+</Project>

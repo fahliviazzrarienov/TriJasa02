@@ -1,0 +1,257 @@
+﻿[ImmediatePostData]
+public string Address1 {
+    // ...
+}
+[Appearance("AddressOneIsEmpty", Enabled = false, Criteria = "IsNullOrEmpty(Address1)", Context="DetailView")]
+public string Address2 {
+    // ...
+}
+
+
+using DevExpress.ExpressApp.ConditionalAppearance;
+using DevExpress.ExpressApp.Editors;
+//...
+[ImmediatePostData]
+public bool IsMarried {
+    // ...
+}
+[Appearance("Single", Visibility = ViewItemVisibility.Hide, Criteria = "!IsMarried", Context="DetailView")]
+public string SpouseName {
+    // ...
+}
+
+
+
+https://supportcenter.devexpress.com/ticket/details/t615814/obsolete-web-lookup-property-editor-based-on-aspxgridlookup
+
+
+
+using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.Web.Editors.ASPx;
+// ...
+public class EnableAdaptivityController : ViewController<ListView> {
+    protected override void OnActivated() {
+        base.OnActivated();
+        ASPxGridListEditor listEditor = View.Editor as ASPxGridListEditor;
+        if(listEditor != null)
+            listEditor.IsAdaptive = true;
+    }
+}
+
+
+
+     PhoneNumber currentObject = (PhoneNumber)View.CurrentObject;
+                        currentObject.Party = View.ObjectSpace.GetObjectByKey<Party>(parentObjectId);
+                        View.ObjectSpace.CommitChanges();
+
+                        INestedObjectSpace nestedObjectSpace = View.ObjectSpace as INestedObjectSpace;
+                        if (nestedObjectSpace != null)
+                        {
+                            IObjectSpace parentObjectSpace = nestedObjectSpace.ParentObjectSpace;
+                            parentObjectSpace.CommitChanges();
+                        }
+                        View.ObjectSpace.Refresh();
+                        if (Application.MainWindow.View != null && Application.MainWindow.View.Id == "Contact_DetailView")
+                        {
+                            Application.MainWindow.View.ObjectSpace.Refresh();
+                        }
+                        ViewShortcut shortcut = View.CreateShortcut();
+                        View newView = Application.ProcessShortcut(shortcut);
+                        newView.CurrentObject = newView.ObjectSpace.CreateObject(newView.ObjectTypeInfo.Type);
+                        e.ShowViewParameters.CreatedView = newView;
+
+murjani        
+
+1018696560
+7806
+
+using DevExpress.ExpressApp.Web.Editors.ASPx;  
+using MainDemo.Module.BusinessObjects;  
+
+namespace MainDemo.Module.Web.Controllers {  
+    public class NewActionLookupViewController : ViewController<DetailView> {  
+        private void lookupPropertyEditor_ControlCreated(object sender, EventArgs e) {  
+            ASPxLookupPropertyEditor lookupPropertyEditor = (ASPxLookupPropertyEditor)sender;  
+            NewObjectViewController newObjectController = lookupPropertyEditor.Frame.GetController<NewObjectViewController>();  
+            if(newObjectController != null) {  
+                newObjectController.NewObjectAction.Active.SetItemValue("PopupWindow", Frame.Context == TemplateContext.PopupWindow);  
+            }  
+        }  
+        protected override void OnActivated() {  
+            base.OnActivated();  
+            if(View.ViewEditMode == ViewEditMode.Edit) {  
+                ASPxLookupPropertyEditor lookupPropertyEditor = View.FindItem("Department") as ASPxLookupPropertyEditor;  
+                if(lookupPropertyEditor != null) {  
+                    lookupPropertyEditor.ControlCreated += lookupPropertyEditor_ControlCreated;  
+                }  
+            }  
+        }  
+        public NewActionLookupViewController()  
+            : base() {  
+            TargetObjectType = typeof(Contact);  
+        }  
+    }  
+}  
+
+
+
+using DevExpress.ExpressApp.Editors;
+//...
+public class SwitchToEditModeModificationsController : ViewController<DetailView> {
+    protected override void OnActivated() {
+        base.OnActivated();
+        if (View.ViewEditMode == ViewEditMode.View) {
+            View.ViewEditMode = ViewEditMode.Edit;
+            ObjectSpace.SetModified(null);
+        }
+    }
+}
+
+/// <summary>  
+/// Action pour sauvegarder et ajouter un autre pneu  
+/// </summary>  
+private void SauverEtNouveau_Execute(object sender, SimpleActionExecuteEventArgs e)  
+{  
+    Validator.RuleSet.ValidateAll(View.ObjectSpace, View.ObjectSpace.GetObjectsToSave(false), ContextIdentifier.Save);  
+
+    if (View.ObjectSpace.IsModified)  
+        View.ObjectSpace.CommitChanges();  
+
+    View.Close(false);  
+    DetailView parentDetailView = (DetailView)Application.MainWindow.View;  
+    ListPropertyEditor lpe = parentDetailView.FindItem("Details") as ListPropertyEditor;  
+    NewObjectViewController targetNewController = lpe.Frame.GetController<NewObjectViewController>();  
+    if (targetNewController != null)  
+    {  
+        ChoiceActionItem targetNewItem = targetNewController.NewObjectAction.Items[0];  
+        targetNewController.NewObjectAction.DoExecute(targetNewItem);  
+    }  
+}  
+
+
+How to disable closing the popup window on pressing Enter in ASP.NET
+
+using DevExpress.ExpressApp.SystemModule;  
+
+protected override void OnActivated() {  
+    base.OnActivated();  
+    DialogController dialogController = Frame.GetController<DialogController>();  
+    if (dialogController != null) {  
+        dialogController.AcceptAction.ActionMeaning = DevExpress.ExpressApp.Actions.ActionMeaning.Unknown;  
+    }  
+}  
+
+
+
+How to auto refresh a ListView in a Web application when saving changes in a pop-up window
+
+
+using System;  
+using DevExpress.ExpressApp;  
+using DevExpress.ExpressApp.SystemModule;  
+using DevExpress.ExpressApp.Web;  
+
+public class CustomizeCloseDialogController : WindowController {  
+    protected override void OnActivated() {  
+        base.OnActivated();  
+        PopupWindow popupWindow = Window as PopupWindow;  
+        if(popupWindow != null) {  
+            DialogController dialogController = popupWindow.GetController<DialogController>();  
+            if(dialogController != null) {  
+                dialogController.Cancelling += previewReportDialogController_Cancelling;  
+            }  
+        }  
+    }  
+    private void previewReportDialogController_Cancelling(object sender, EventArgs e) {  
+        Window.Close(true);  
+    }  
+}  
+
+
+
+using System;  
+using DevExpress.ExpressApp;  
+using MainDemo.Module.BusinessObjects;  
+using DevExpress.ExpressApp.Win.Editors;  
+
+namespace MainDemo.Module.Win {  
+    public class CustomizeCurrentGradeController : ObjectViewController<DetailView, Student> {  
+        ObjectPropertyEditor currentGradeEditor;  
+        protected override void OnActivated() {  
+            base.OnActivated();  
+            currentGradeEditor = View.FindItem("CurrentGrade") as ObjectPropertyEditor;  
+            if (currentGradeEditor != null) {  
+                currentGradeEditor.ControlCreated += currentGradeEditor_ControlCreated;  
+            }  
+        }  
+        void currentGradeEditor_ControlCreated(object sender, EventArgs e) {  
+            currentGradeEditor.Control.ForceValueChanged = true;  
+        }  
+        protected override void OnDeactivated() {  
+            base.OnDeactivated();  
+            if (currentGradeEditor != null) {  
+                currentGradeEditor.ControlCreated -= currentGradeEditor_ControlCreated;  
+                currentGradeEditor = null;  
+            }  
+        }  
+    }  
+}  
+
+
+
+https://supportcenter.devexpress.com/ticket/details/t219521/how-to-add-the-save-and-new-action-in-a-detaiview-shown-for-the-aggregated-detail#
+
+
+
+class Book : XPObject {
+    public string Name {
+     get { return fName; }
+     set { SetPropertyValue(nameof(Name), ref fName, value); }
+ }
+ string fName = "";
+
+}
+class Article : XPObject {
+    [ExplicitLoading()]
+    public Book theBook {
+     get { return ftheBook; }
+     set { SetPropertyValue(nameof(theBook), ref ftheBook, value); }
+ }
+ Book ftheBook;
+
+}
+class Topic : XPObject {
+    [ExplicitLoading()]
+    public Article theArticle {
+     get { return ftheArticle; }
+     set { SetPropertyValue(nameof(theArticle), ref ftheArticle, value); }
+ }
+ Article ftheArticle;
+
+}
+class Category : XPObject {
+    public Topic theTopic {
+     get { return ftheTopic; }
+     set { SetPropertyValue(nameof(theTopic), ref ftheTopic, value); }
+ }
+ Topic ftheTopic;
+
+}
+
+
+
+private void xrTableCell8_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e) {  
+    string fieldName;  
+    XRTableCell cell = sender as XRTableCell;  
+    if(cell.DataBindings.Count > 0) {  
+        fieldName = cell.DataBindings[0].DataMember;  
+        int index = fieldName.LastIndexOf(".");  
+        if(index > 0)  
+            fieldName = fieldName.Substring(index + 1);  
+        double value = Convert.ToDouble(GetCurrentColumnValue(fieldName));  
+        if(value == 0)  
+            cell.Text = "";  
+        else  
+            cell.Text = String.Format("{0}", value);  
+    }  
+}  

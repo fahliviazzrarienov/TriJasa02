@@ -1,0 +1,34 @@
+﻿Examples
+This example demonstrates how to use the XRLabel.SummaryCalculated event for a label control.
+In this example, the report's dataset contains two related tables. 
+The Categories table is bound to the main report, and the Products table is used as the DetailReport's data source, 
+which gives a list of products by categories.
+
+The detail report calculates the sum of the UnitPrice column for each product. 
+This summary is calculated automatically. 
+The grand total of the UnitPrice summaries must be displayed in the main report. 
+You have to write your own code to calculate this kind of summary. 
+It cannot be calculated automatically, because the UnitPrice column does not belong to the main report's data source.
+
+You should handle the SummaryCalculated event of summary labels in your detail report.
+Please note that when the BeforePrint event is fired, a summary value has not yet been calculated; you should use SummaryCalculated 
+to obtain a calculated summary value. The summaries of individual detail reports are incremented in a global variable (GrandTotals), which is then printed in the main report's footer.
+
+C#VB.NET
+using System.Drawing.Printing;
+using DevExpress.XtraReports.UI;
+// ...
+
+// Grand total value.
+double GrandTotals = 0;
+
+// Add the summary value to the grand total.
+private void lbUnitPriceTotal_SummaryCalculated(object sender, TextFormatEventArgs e) {
+   if(e.Value != null)
+      GrandTotals += Convert.ToDouble(e.Value);
+}
+
+// Set the grand total value to the label's text.
+private void lbUnitPriceGrandTotal_BeforePrint(object sender, PrintEventArgs e) {
+   ((XRLabel)sender).Text = GrandTotals.ToString();
+}

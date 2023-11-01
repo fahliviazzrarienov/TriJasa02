@@ -1,0 +1,95 @@
+﻿  // add for non persistant
+        private static Dictionary<int, NonPersistentClass> ObjectsCache
+        {
+            get
+            {
+                var manager = ValueManager.GetValueManager<Dictionary<int, NonPersistentClass>>("NP");
+                Dictionary<int, NonPersistentClass> objectsCache = (manager.CanManageValue) ? manager.Value : null;
+                if (objectsCache == null)
+                {
+                    objectsCache = new Dictionary<int, NonPersistentClass>();
+                    objectsCache.Add(0, new NonPersistentClass(0, "A"));
+                    objectsCache.Add(1, new NonPersistentClass(1, "B"));
+                    objectsCache.Add(2, new NonPersistentClass(2, "C"));
+                    objectsCache.Add(3, new NonPersistentClass(3, "D"));
+                    objectsCache.Add(4, new NonPersistentClass(4, "E"));
+                    if (manager.CanManageValue)
+                    {
+                        manager.Value = objectsCache;
+                    }
+                }
+                return objectsCache;
+            }
+        }
+ 
+        private void Application_SetupComplete(object sender, EventArgs e)
+        {
+            Application.ObjectSpaceCreated += Application_ObjectSpaceCreated;
+        }
+        private void Application_ObjectSpaceCreated(object sender, ObjectSpaceCreatedEventArgs e)
+        {
+            NonPersistentObjectSpace nonPersistentObjectSpace = e.ObjectSpace as NonPersistentObjectSpace;
+            if (nonPersistentObjectSpace != null)
+            {
+                nonPersistentObjectSpace.ObjectsGetting += NonPersistentObjectSpace_ObjectsGetting;
+                nonPersistentObjectSpace.ObjectByKeyGetting += NonPersistentObjectSpace_ObjectByKeyGetting;
+                nonPersistentObjectSpace.ObjectGetting += NonPersistentObjectSpace_ObjectGetting;
+                nonPersistentObjectSpace.Committing += NonPersistentObjectSpace_Committing;
+            }
+        }
+        private void NonPersistentObjectSpace_ObjectsGetting(Object sender, ObjectsGettingEventArgs e)
+        {
+            if (e.ObjectType == typeof(NonPersistentClass))
+            {
+                IObjectSpace objectSpace = (IObjectSpace)sender;
+                BindingList<NonPersistentClass> objects = new BindingList<NonPersistentClass>();
+                objects.AllowNew = true;
+                objects.AllowEdit = true;
+                objects.AllowRemove = true;
+                foreach (NonPersistentClass obj in ObjectsCache.Values)
+                {
+                    objects.Add(objectSpace.GetObject<NonPersistentClass>(obj));
+                }
+                e.Objects = objects;
+            }
+        }
+        private void NonPersistentObjectSpace_ObjectByKeyGetting(object sender, ObjectByKeyGettingEventArgs e)
+        {
+            IObjectSpace objectSpace = (IObjectSpace)sender;
+            if (e.ObjectType == typeof(NonPersistentClass))
+            {
+                NonPersistentClass obj;
+                if (ObjectsCache.TryGetValue((int)e.Key, out obj))
+                {
+                    e.Object = objectSpace.GetObject(obj);
+                }
+            }
+        }
+        private void NonPersistentObjectSpace_ObjectGetting(object sender, ObjectGettingEventArgs e)
+        {
+            if (e.SourceObject is NonPersistentClass)
+            {
+                ((IObjectSpaceLink)e.TargetObject).ObjectSpace = (IObjectSpace)sender;
+            }
+        }
+        private void NonPersistentObjectSpace_Committing(Object sender, CancelEventArgs e)
+        {
+            IObjectSpace objectSpace = (IObjectSpace)sender;
+            foreach (Object obj in objectSpace.ModifiedObjects)
+            {
+                NonPersistentClass myobj = obj as NonPersistentClass;
+                if (obj != null)
+                {
+                    if (objectSpace.IsNewObject(obj))
+                    {
+                        int key = ObjectsCache.Count;
+                        myobj.ID = key;
+                        ObjectsCache.Add(key, myobj);
+                    }
+                    else if (objectSpace.IsDeletedObject(obj))
+                    {
+                        ObjectsCache.Remove(myobj.ID);
+                    }
+                }
+            }
+        }
